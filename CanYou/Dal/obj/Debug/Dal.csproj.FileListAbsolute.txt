@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\CanYou\Dal\obj\Debug\Dal.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\CanYou\Dal\bin\Debug\DAL.dll
+C:\Users\Administrator\Desktop\CanYou\Dal\bin\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\CanYou\Dal\bin\Debug\Common.dll
+C:\Users\Administrator\Desktop\CanYou\Dal\bin\Debug\Model.dll
+C:\Users\Administrator\Desktop\CanYou\Dal\bin\Debug\Common.pdb
+C:\Users\Administrator\Desktop\CanYou\Dal\bin\Debug\Model.pdb
+C:\Users\Administrator\Desktop\CanYou\Dal\obj\Debug\DAL.dll
+C:\Users\Administrator\Desktop\CanYou\Dal\obj\Debug\DAL.pdb

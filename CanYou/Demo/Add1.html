@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Aui/css/aui.2.0.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="Aui/script/aui-dialog.js"></script>
+    <script src="Aui/script/aui-toast.js"></script>
+    <script src="js/Validform_v5.3.2_min.js"></script>
+    <script>
+        var dialog = new auiDialog({});
+        var toast = new auiToast();
+        $(function () { 
+            $(".form1").Validform({
+                btnSubmit: "#btn_sub",//点击此id按钮时触发
+                tipSweep:true,//true是提交表单才验证，离开焦点不验证
+            tiptype:function(msg,o,cssctl){
+
+                //是错误的才提示
+                if (o.type == 3) {
+                   
+                   
+                    dialog.alert({
+                        title: "提示",
+                        msg:msg,
+                        buttons: [ '确定']
+                    }, function (ret) {
+                        o.obj.focus();//设置当前对象焦点
+                        
+                    })
+                }
+               
+            },
+            beforeSubmit: function (form) {
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+                $.ajax({
+                    type: "Post",
+                    data: form.serialize(),
+                    dataType: "json",
+                    url: form.attr("url"),
+                    success: function (data, textStatus) {
+                        if (data.status == 1) {
+                            toast.success({
+                                title:data.msg,
+                                duration: 2000
+                            });
+                        }
+                        else
+                        {
+                            dialog.alert({
+                                title: "错误提示",
+                                msg: data.msg,
+                                buttons: ['确定'],
+                            }, function (ret) {
+                               
+
+                            })
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        dialog.alert({
+                            title: "错误提示",
+                            buttons: [ '确定'],
+                            msg: '状态：' + textStatus + '错误：' + errorThrown,
+                        }, function (ret) {
+
+
+                        })
+                    }
+                });
+                return false;
+            }
+
+
+
+        })
+        })
+    </script>
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav" id="aui-header">
+        <a class="aui-btn aui-pull-left" onclick="javascript:history.go(-1)">
+            <span class=" aui-iconfont aui-icon-left">
+            </span>
+        </a>
+        <div class="aui-title">add1</div>
+    </header>
+    <div class="aui-content-padded">
+        <form class="form1" url="Tools/SubmitAjax.ashx?action=add1">
+            <ul class="aui-list aui-form-list">
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label-icon">
+                            <i class="aui-iconfont aui-icon-my"></i>
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input name="name" type="text" placeholder="姓名" datatype="*2-10" errormsg="姓名范围在2~10位之间！" nullmsg="姓名不能为空！">
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label-icon">
+                            <i class="aui-iconfont aui-icon-mobile"></i>
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input name="phone" type="text" placeholder="手机号" datatype="m" nullmsg="手机号不能为空！" errormsg="手机号格式不正确！">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div id="btn_sub" class="aui-btn aui-btn-info aui-btn-block aui-btn-sm aui-padded-l-15 aui-padded-r-15 aui-margin-t-15">提交</div>
+
+        </form>
+    </div>
+    <footer class="aui-bar aui-bar-tab" id="footer">
+        <div class="aui-bar-tab-item aui-active " onclick="javascript: location.href = 'Add1.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加1</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="javascript: location.href = 'Add2.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加2</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="javascript: location.href = 'Add3.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加3</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="javascript: location.href = 'Index.html'">
+            <i class="aui-iconfont aui-icon-menu"></i>
+            <div class="aui-bar-tab-label">列表1</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="javascript: location.href = 'Index2.html'">
+            <i class="aui-iconfont aui-icon-menu"></i>
+            <div class="aui-bar-tab-label">列表2</div>
+        </div>
+    </footer>
+</body>
+</html>

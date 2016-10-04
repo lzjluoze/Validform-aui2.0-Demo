@@ -1,0 +1,118 @@
+﻿
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="Aui/css/aui.2.0.css" />
+    <style type="text/css">
+        #demo {
+            position: fixed;
+            padding: 0.5rem 0.2rem;
+            right: 0;
+            bottom: 0.75rem;
+            background-color: #e0e0e0;
+            color: #212121;
+            z-index: 999;
+        }
+    </style>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="Aui/script/aui-scroll.js"></script>
+
+</head>
+<body>
+    <div id="demo">滚动高度：</div>
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in"></ul>
+       
+    </div>
+    <div class="aui-content aui-margin-b-15">
+       
+        <p id="loadHint"></p>
+    </div>
+    <script src="js/AjaxPage.js"></script>
+    <script type="text/javascript">
+        var ajaxPage = new NewsAjaxPage();
+        //分页遍历
+        function AjaxPageEach(data) {
+            $.each(
+                data.list,
+                        function (n, value) {
+                            var htmlStr = '';
+                            htmlStr += '<li class="aui-list-item">';
+                            htmlStr += '<div class="aui-list-item-inner">姓名：';
+                            htmlStr += value.Name +'<br/>电话：'+ value.Phone;
+                            htmlStr += '</div>';
+                            htmlStr += '</li>';
+                            $(".aui-list").append(htmlStr);
+                        });
+        }
+        $(function () {
+            ajaxPage.create({
+                appendId: '.aui-list',
+                pageSize: 15,
+                url: 'Tools/AjaxPage.ashx?action=list',
+                sendData: {},
+                pageType:2//分页类型1分批加载，2到底部加载
+            },
+            function (ret) {
+                ret.data;
+
+            }
+            );
+
+           
+        })
+        var scroll = new auiScroll({
+            listen: true,
+            distance: 100 //判断到达底部的距离，isToBottom为true
+        }, function (ret) {
+            if (ret.isToBottom) {
+                document.getElementById("demo").textContent = "已到达底部";
+                ajaxPage.create({
+                    appendId: '.aui-list',
+                    pageSize: 15,
+                    url: 'Tools/AjaxPage.ashx?action=list',
+                    sendData: {},
+                    pageType: 2//分页类型1分批加载，2到底部加载
+                },
+            function (ret) {
+                ret.data;
+
+            }
+            );
+            } else {
+                document.getElementById("demo").textContent = "滚动高度：" + ret.scrollTop;
+            }
+
+        });
+    </script>
+
+    <footer class="aui-bar aui-bar-tab" id="footer">
+        <div class="aui-bar-tab-item  " onclick="javascript: location.href = 'Add1.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加1</div>
+        </div>
+        <div class="aui-bar-tab-item " onclick="javascript: location.href = 'Add2.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加2</div>
+        </div>
+        <div class="aui-bar-tab-item " onclick="javascript: location.href = 'Add3.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加3</div>
+        </div>
+        <div class="aui-bar-tab-item " onclick="javascript: location.href = 'Index.html'">
+            <i class="aui-iconfont aui-icon-menu"></i>
+            <div class="aui-bar-tab-label">列表1</div>
+        </div>
+        <div class="aui-bar-tab-item aui-active" onclick="javascript: location.href = 'Index2.html'">
+            <i class="aui-iconfont aui-icon-menu"></i>
+            <div class="aui-bar-tab-label">列表2</div>
+        </div>
+    </footer>
+</body>
+</html>
+
+

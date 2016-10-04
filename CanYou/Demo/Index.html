@@ -1,0 +1,75 @@
+﻿
+<html>
+<head >
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="Aui/css/aui.2.0.css" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/AjaxPage.js"></script>
+      <script type="text/javascript">
+          var ajaxPage = new NewsAjaxPage();
+          //分页遍历
+          function AjaxPageEach(data) {
+              $.each(
+                  data.list,
+                          function (n, value) {
+                              var htmlStr = '';
+                              htmlStr += '<li class="aui-list-item">';
+                              htmlStr += '<div class="aui-list-item-inner">姓名：';
+                              htmlStr += value.Name +'<br/>电话：'+ value.Phone;
+                              htmlStr += '</div>';
+                              htmlStr += '</li>';
+                              $(".aui-list").append(htmlStr);
+                          });
+          }
+          $(function () {
+              ajaxPage.create({
+                  appendId: '.aui-list',
+                  pageSize:12,
+                  url:'Tools/AjaxPage.ashx?action=list',
+                  sendData: {},
+                  pageType: 1//分页类型1分批加载，2到底部加载
+              },
+              function (ret) {
+                  ret.data;
+              }
+              );
+          })
+      </script>
+</head>
+<body>
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+        </ul>
+       
+    </div>
+    <div class="aui-content aui-margin-b-15">
+        <p id="loadHint"></p>
+    </div>
+    <footer class="aui-bar aui-bar-tab" id="footer">
+        <div class="aui-bar-tab-item  " onclick="javascript: location.href = 'Add1.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加1</div>
+        </div>
+        <div class="aui-bar-tab-item " onclick="javascript: location.href = 'Add2.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加2</div>
+        </div>
+        <div class="aui-bar-tab-item " onclick="javascript: location.href = 'Add3.html'">
+            <i class="aui-iconfont aui-icon-plus"></i>
+            <div class="aui-bar-tab-label">添加3</div>
+        </div>
+        <div class="aui-bar-tab-item aui-active" onclick="javascript: location.href = 'Index.html'">
+            <i class="aui-iconfont aui-icon-menu"></i>
+            <div class="aui-bar-tab-label">列表1</div>
+        </div>
+        <div class="aui-bar-tab-item" onclick="javascript: location.href = 'Index2.html'">
+            <i class="aui-iconfont aui-icon-menu"></i>
+            <div class="aui-bar-tab-label">列表2</div>
+        </div>
+    </footer>
+</body>
+</html>

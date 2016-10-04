@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\CanYou\Bll\obj\Debug\Bll.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\BLL.dll
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\BLL.pdb
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\Common.dll
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\DAL.dll
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\Model.dll
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\System.Data.SQLite.dll
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\Common.pdb
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\DAL.pdb
+C:\Users\Administrator\Desktop\CanYou\Bll\bin\Debug\Model.pdb
+C:\Users\Administrator\Desktop\CanYou\Bll\obj\Debug\BLL.dll
+C:\Users\Administrator\Desktop\CanYou\Bll\obj\Debug\BLL.pdb
